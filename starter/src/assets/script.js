@@ -46,24 +46,22 @@ const cart = [];
   - if the product is not already in the cart, add it to the cart
 */
 
-function addProductToCart(productId){
+function addProductToCart(x){
   for (let i = 0; i < products.length; i++) {
-    if (productId = products[i].productId){
-      products.quantity++;
-    }
-      if (!cart.includes(products[i])){
+    if ((x = products[i].productId) && (!cart.includes(products[i]))){
+      products[i].quantity++;
       cart.push(products[i]);
-      }
-      }
+    }
+    }
 };
 
 /* Create a function named increaseQuantity that takes in the productId as an argument
   - increaseQuantity should get the correct product based on the productId
   - increaseQuantity should then increase the product's quantity
 */
-function increaseQuantity(productId){
+function increaseQuantity(y){
   for (i = 0; i < products.length; i++) {
-    if (productId = products[i].productId){
+    if (y = products[i].productId){
       products[i].quantity++;
     }
   }
@@ -74,10 +72,10 @@ function increaseQuantity(productId){
   - decreaseQuantity should decrease the quantity of the product
   - if the function decreases the quantity to 0, the product is removed from the cart
 */
-function decreaseQuantity(productId){
+function decreaseQuantity(c){
   for (i = 0; i < products.length; i++) {
-    if (productId = products[i].productId){
-      products[i].quantity+=1;
+    if (c = products[i].productId){
+      products[i].quantity--;
     }
       if (products[i].quantity === 0){
         cart.splice(cart.indexOf(products[i]), 1);
@@ -90,9 +88,9 @@ function decreaseQuantity(productId){
   - removeProductFromCart should remove the product from the cart
 */
 
-function removeProductFromCart(productId){
+function removeProductFromCart(v){
   for (i = 0; i < cart.length; i++) {
-    if (productId = cart[i].productId){
+    if (v = cart[i].productId){
       cart.splice(cart.indexOf(cart[i], 1));
       cart[i].quantity = 0;
     }
@@ -109,7 +107,7 @@ function cartTotal(){
   for (i = 0; i < cart.length; i++){
     totalSum += cart[i].price;
   }
-  return `The total sum of your cart is ${totalSum}`;
+  return ` ${totalSum}`;
 }
 
 /* Create a function called emptyCart that empties the products from the cart */
@@ -122,11 +120,12 @@ function emptyCart(){
   - pay will return a positive number if money should be returned to customer
 */
 function pay (ammount){
+  let change = ammount - cartTotal.totalSum;
   if ( ammount < cart.totalSum){
-    return `${ammount - cart.totalSum} left to purchase`
+    return `${change}`
   }
   else {
-    return `You'll get ${ammount - cart.totalSum} change`
+    return  `${change}`
   }
 
 }
