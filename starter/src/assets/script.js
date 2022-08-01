@@ -46,9 +46,9 @@ const cart = [];
   - if the product is not already in the cart, add it to the cart
 */
 
-function addProductToCart(x){
+function addProductToCart(productId){
   for (let i = 0; i < products.length; i++) {
-    if ((x = products[i].productId) && (!cart.includes(products[i]))){
+    if ((productId = products[i].productId) && (!cart.includes(products[i]))){
       products[i].quantity++;
       cart.push(products[i]);
     }
@@ -59,9 +59,9 @@ function addProductToCart(x){
   - increaseQuantity should get the correct product based on the productId
   - increaseQuantity should then increase the product's quantity
 */
-function increaseQuantity(y){
+function increaseQuantity(productId){
   for (i = 0; i < products.length; i++) {
-    if (y = products[i].productId){
+    if (productId = products[i].productId){
       products[i].quantity++;
     }
   }
@@ -72,9 +72,9 @@ function increaseQuantity(y){
   - decreaseQuantity should decrease the quantity of the product
   - if the function decreases the quantity to 0, the product is removed from the cart
 */
-function decreaseQuantity(c){
+function decreaseQuantity(productId){
   for (i = 0; i < products.length; i++) {
-    if (c = products[i].productId){
+    if (productId = products[i].productId){
       products[i].quantity--;
     }
       if (products[i].quantity === 0){
@@ -88,9 +88,9 @@ function decreaseQuantity(c){
   - removeProductFromCart should remove the product from the cart
 */
 
-function removeProductFromCart(v){
+function removeProductFromCart(productId){
   for (i = 0; i < cart.length; i++) {
-    if (v = cart[i].productId){
+    if (productId = cart[i].productId){
       cart.splice(cart.indexOf(cart[i], 1));
       cart[i].quantity = 0;
     }
