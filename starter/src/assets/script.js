@@ -13,7 +13,7 @@ const cherry = {
   name: "Cherry",
   price: 2.99,
   quantity: 0,
-  productId: 010,
+  productId: 1,
   image: "images/cherry.jpg"
 };
 
@@ -21,7 +21,7 @@ const orange = {
   name: "Orange",
   price: 2.55,
   quantity: 0,
-  productId: 011,
+  productId: 2,
   image: "images/orange.jpg"
 };
 
@@ -29,7 +29,7 @@ const strawberry = {
   name: "Strawberry",
   price: 1.99,
   quantity: 0,
-  productId: 012,
+  productId: 3,
   image: "images/strawberry.jpg"
 };
 
@@ -47,12 +47,15 @@ const cart = [];
 */
 
 function addProductToCart(productId){
-  for (let i = 0; i < products.length; i++) {
-    if ((productId = products[i].productId) && (!cart.includes(products[i]))){
-      products[i].quantity++;
-      cart.push(products[i]);
-    }
-    }
+    for (let i = 0; i < products.length; i++) {
+      if (productId == products[i].productId ){
+        if (cart.includes(products[i])) {
+          products[i].quantity++;
+        } else {
+          cart.push(products[i]);
+          products[i].quantity++;
+       } }
+  }
 };
 
 /* Create a function named increaseQuantity that takes in the productId as an argument
@@ -61,8 +64,9 @@ function addProductToCart(productId){
 */
 function increaseQuantity(productId){
   for (i = 0; i < products.length; i++) {
-    if (productId = products[i].productId){
+    if (productId == products[i].productId){
       products[i].quantity++;
+      return;
     }
   }
 };
@@ -74,12 +78,15 @@ function increaseQuantity(productId){
 */
 function decreaseQuantity(productId){
   for (i = 0; i < products.length; i++) {
-    if (productId = products[i].productId){
-      products[i].quantity--;
-    }
-      if (products[i].quantity === 0){
-        cart.splice(cart.indexOf(products[i]), 1);
+      if ( productId == products[i].productId ) {
+        if ( products[i].quantity == 1){
+        cart.splice(cart.indexOf(products[i], 1));
+        products[i].quantity = 0;
+        cart[i].quantity = 0;
+        }else { 
+        products[i].quantity--;
       }
+    }
   }
 };
 /* Create a function named removeProductFromCart that takes in the productId as an argument
@@ -90,9 +97,10 @@ function decreaseQuantity(productId){
 
 function removeProductFromCart(productId){
   for (i = 0; i < cart.length; i++) {
-    if (productId = cart[i].productId){
+    if (productId == cart[i].productId){
       cart.splice(cart.indexOf(cart[i], 1));
       cart[i].quantity = 0;
+      return;
     }
   }
 }
@@ -101,11 +109,10 @@ function removeProductFromCart(productId){
   - cartTotal should iterate through the cart to get the total of all products
   - cartTotal should return the sum of the products in the cart
 */
-
+let totalSum = 0;
 function cartTotal(){
-  let totalSum = 0;
   for (i = 0; i < cart.length; i++){
-    totalSum += cart[i].price;
+    totalSum +=  cart[i].price;
   }
   return ` ${totalSum}`;
 }
@@ -120,12 +127,12 @@ function emptyCart(){
   - pay will return a positive number if money should be returned to customer
 */
 function pay (ammount){
-  let change = ammount - cartTotal.totalSum;
-  if ( ammount < cart.totalSum){
-    return `${change}`
+  let change = ammount - totalSum;
+  if ( ammount < totalSum){
+    return `${parseInt(change)}`
   }
   else {
-    return  `${change}`
+    return  `${parseInt(change)}`
   }
 
 }
