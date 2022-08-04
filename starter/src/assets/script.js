@@ -78,14 +78,12 @@ function increaseQuantity(productId){
 */
 function decreaseQuantity(productId){
   for (i = 0; i < products.length; i++) {
-      if ( productId == products[i].productId ) {
-        if ( products[i].quantity == 1){
+      if  (productId == products[i].productId) 
+        if (products[i].quantity > 1) {
+            products[i].quantity--;
+        }else{
         cart.splice(cart.indexOf(products[i], 1));
         products[i].quantity = 0;
-        cart[i].quantity = 0;
-        }else { 
-        products[i].quantity--;
-      }
     }
   }
 };
@@ -98,28 +96,36 @@ function decreaseQuantity(productId){
 function removeProductFromCart(productId){
   for (i = 0; i < cart.length; i++) {
     if (productId == cart[i].productId){
-      cart.splice(cart.indexOf(cart[i], 1));
       cart[i].quantity = 0;
-      return;
+      cart.splice(cart.indexOf(cart[i], 1));
     }
   }
-}
+};
 
 /* Create a function named cartTotal that has no parameters
   - cartTotal should iterate through the cart to get the total of all products
   - cartTotal should return the sum of the products in the cart
 */
-let totalSum = 0;
+
 function cartTotal(){
+  let totalSum = 0;
   for (i = 0; i < cart.length; i++){
-    totalSum +=  cart[i].price;
+    totalSum+= cart[i].price * cart[i].quantity;
   }
-  return ` ${totalSum}`;
-}
+  return totalSum;
+};
+/**function cartTotal(){
+  console.log("Before going through cart: " + totalSum);
+  for (i = 0; i < cart.length; i++){
+    totalSum+= cart[i].price * cart[i].quantity;
+  }
+  console.log("After going through cart: " + totalSum);
+  return ` ${totalSum.toFixed(2)}`;
+};**/
 
 /* Create a function called emptyCart that empties the products from the cart */
 function emptyCart(){
-  cart.lenght = 0;
+  cart.length = 0;
 }
 
 /* Create a function named pay that takes in an amount as an argument
@@ -127,15 +133,18 @@ function emptyCart(){
   - pay will return a positive number if money should be returned to customer
 */
 function pay (ammount){
-  let change = ammount - totalSum;
-  if ( ammount < totalSum){
-    return `${parseInt(change)}`
+  let sumToPay = cartTotal();
+  let change = ammount - sumToPay;
+  console.log(typeof(change));
+  console.log(typeof(ammount));
+  console.log(typeof(sumToPay));
+  if ( ammount < sumToPay){
+    return `${change}`
   }
   else {
-    return  `${parseInt(change)}`
+    return  `${change}`
   }
-
-}
+};
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
