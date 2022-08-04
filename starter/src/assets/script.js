@@ -135,9 +135,7 @@ function emptyCart(){
 function pay (ammount){
   let sumToPay = cartTotal();
   let change = ammount - sumToPay;
-  console.log(typeof(change));
-  console.log(typeof(ammount));
-  console.log(typeof(sumToPay));
+ 
   if ( ammount < sumToPay){
     return `${change}`
   }
