@@ -45,6 +45,15 @@ const cart = [];
   - addProductToCart should then increase the product's quantity
   - if the product is not already in the cart, add it to the cart
 */
+function getProductById(productId, productList) {
+  for (let i = 0; i < productList.length; i++) {
+    if (productList[i].productId === productId) {
+      return productList[i];
+    }
+  }
+  return null;
+}
+
 
 function addProductToCart(productId){
     for (let i = 0; i < products.length; i++) {
@@ -53,7 +62,7 @@ function addProductToCart(productId){
           products[i].quantity++;
         } else {
           cart.push(products[i]);
-          products[i].quantity++;
+          products[i].quantity=1;
        } }
   }
 };
@@ -82,8 +91,9 @@ function decreaseQuantity(productId){
         if (products[i].quantity > 1) {
             products[i].quantity--;
         }else{
-        cart.splice(cart.indexOf(products[i], 1));
+        cart.splice(cart.indexOf(i, 1));
         products[i].quantity = 0;
+        break;
     }
   }
 };
@@ -97,13 +107,14 @@ function removeProductFromCart(productId){
   for (i = 0; i < cart.length; i++) {
     if (productId == cart[i].productId){
       cart[i].quantity = 0;
-      cart.splice(cart.indexOf(cart[i], 1));
+      cart.splice(i, 1);
+      break;
     }
   }
 };
 
 /* Create a function named cartTotal that has no parameters
-  - cartTotal should iterate through the cart to get the total of all products
+  - cartTotal sehould iterate through the cart to get the total of all products
   - cartTotal should return the sum of the products in the cart
 */
 
