@@ -108,7 +108,7 @@ function removeProductFromCart(productId){
   for (i = 0; i < cart.length; i++) {
     if (productId == cart[i].productId){
       cart[i].quantity = 0;
-      cart.splice(products[i], 1);
+      cart.splice(cart[i], 1);
     }
   }
 };
