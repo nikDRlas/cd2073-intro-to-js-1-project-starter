@@ -85,17 +85,18 @@ function increaseQuantity(productId){
   - decreaseQuantity should decrease the quantity of the product
   - if the function decreases the quantity to 0, the product is removed from the cart
 */
-function decreaseQuantity(productId){
+function decreaseQuantity(productId){ 
   for (i = 0; i < products.length; i++) {
-      if  (productId == products[i].productId) 
+      if  (productId == products[i].productId){ 
         if (products[i].quantity > 1) {
             products[i].quantity--;
         }else{
-        cart.splice(cart.indexOf(i, 1));
+        cart.splice(cart.indexOf(products[i]), 1);
         products[i].quantity = 0;
         break;
     }
   }
+}
 };
 /* Create a function named removeProductFromCart that takes in the productId as an argument
   - removeProductFromCart should get the correct product based on the productId
@@ -107,8 +108,7 @@ function removeProductFromCart(productId){
   for (i = 0; i < cart.length; i++) {
     if (productId == cart[i].productId){
       cart[i].quantity = 0;
-      cart.splice(i, 1);
-      break;
+      cart.splice(products[i], 1);
     }
   }
 };
