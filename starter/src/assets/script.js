@@ -52,12 +52,12 @@ function getProductByIdFromList(productId, productList) {
 
 function addProductToCart(productId){
   let product = getProductByIdFromList(productId, products);
-        if (cart.includes(product)) {
-          product.quantity++;
-        } else {
-          cart.push(product);
-          product.quantity=1;
-       } 
+    if (cart.includes(product)) {
+      product.quantity++;
+    }else {
+      cart.push(product);
+      product.quantity=1;
+    } 
 }
 
 /* Create a function named increaseQuantity that takes in the productId as an argument
@@ -66,9 +66,9 @@ function addProductToCart(productId){
 */
 function increaseQuantity(productId){
   let product = getProductByIdFromList(productId, products);
-      product.quantity++;
-      return;
-  }
+    product.quantity++;
+    return;
+}
 
 
 /* Create a function named decreaseQuantity that takes in the productId as an argument
@@ -78,13 +78,13 @@ function increaseQuantity(productId){
 */
 function decreaseQuantity(productId){ 
   let product = getProductByIdFromList(productId, products); 
-        if (product.quantity > 1) {
-            product.quantity--;
-        }else{
-        cart.splice(cart.indexOf(product), 1);
-        product.quantity = 0;
+    if (product.quantity > 1) {
+      product.quantity--;
+    }else{
+      cart.splice(cart.indexOf(product), 1);
+      product.quantity = 0;
     }
-  }
+}
 
 /* Create a function named removeProductFromCart that takes in the productId as an argument
   - removeProductFromCart should get the correct product based on the productId
@@ -94,9 +94,9 @@ function decreaseQuantity(productId){
 
 function removeProductFromCart(productId){
   let product = getProductByIdFromList(productId, cart);
-      product.quantity = 0;
-      cart.splice(cart.indexOf(product), 1);
-    }
+    product.quantity = 0;
+    cart.splice(cart.indexOf(product), 1);
+}
 
 
 /* Create a function named cartTotal that has no parameters
@@ -137,8 +137,7 @@ function pay (amount){
  
   if ( amount < sumToPay){
     return `${totalPaid - sumToPay}`
-  }
-  else {
+  }else {
     return  `${totalPaid - sumToPay}`
   }
 }
