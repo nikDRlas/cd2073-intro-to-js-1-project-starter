@@ -45,40 +45,31 @@ const cart = [];
   - addProductToCart should then increase the product's quantity
   - if the product is not already in the cart, add it to the cart
 */
-function getProductById(productId, productList) {
-  for (let i = 0; i < productList.length; i++) {
-    if (productList[i].productId === productId) {
-      return productList[i];
-    }
-  }
-  return null;
+function getProductByIdFromList(productId, productList) {
+  return productList.find((product) => product.productId === productId);
 }
 
 
 function addProductToCart(productId){
-    for (let i = 0; i < products.length; i++) {
-      if (productId == products[i].productId ){
-        if (cart.includes(products[i])) {
-          products[i].quantity++;
+  let product = getProductByIdFromList(productId, products);
+        if (cart.includes(product)) {
+          product.quantity++;
         } else {
-          cart.push(products[i]);
-          products[i].quantity=1;
-       } }
-  }
-};
+          cart.push(product);
+          product.quantity=1;
+       } 
+}
 
 /* Create a function named increaseQuantity that takes in the productId as an argument
   - increaseQuantity should get the correct product based on the productId
   - increaseQuantity should then increase the product's quantity
 */
 function increaseQuantity(productId){
-  for (i = 0; i < products.length; i++) {
-    if (productId == products[i].productId){
-      products[i].quantity++;
+  let product = getProductByIdFromList(productId, products);
+      product.quantity++;
       return;
-    }
   }
-};
+
 
 /* Create a function named decreaseQuantity that takes in the productId as an argument
   - decreaseQuantity should get the correct product based on the productId
@@ -86,18 +77,15 @@ function increaseQuantity(productId){
   - if the function decreases the quantity to 0, the product is removed from the cart
 */
 function decreaseQuantity(productId){ 
-  for (i = 0; i < products.length; i++) {
-      if  (productId == products[i].productId){ 
-        if (products[i].quantity > 1) {
-            products[i].quantity--;
+  let product = getProductByIdFromList(productId, products); 
+        if (product.quantity > 1) {
+            product.quantity--;
         }else{
-        cart.splice(cart.indexOf(products[i]), 1);
-        products[i].quantity = 0;
-        break;
+        cart.splice(cart.indexOf(product), 1);
+        product.quantity = 0;
     }
   }
-}
-};
+
 /* Create a function named removeProductFromCart that takes in the productId as an argument
   - removeProductFromCart should get the correct product based on the productId
   - removeProductFromCart should update the product quantity to 0
@@ -105,13 +93,11 @@ function decreaseQuantity(productId){
 */
 
 function removeProductFromCart(productId){
-  for (i = 0; i < cart.length; i++) {
-    if (productId == cart[i].productId){
-      cart[i].quantity = 0;
-      cart.splice(cart[i], 1);
+  let product = getProductByIdFromList(productId, cart);
+      product.quantity = 0;
+      cart.splice(cart.indexOf(product), 1);
     }
-  }
-};
+
 
 /* Create a function named cartTotal that has no parameters
   - cartTotal sehould iterate through the cart to get the total of all products
@@ -120,11 +106,11 @@ function removeProductFromCart(productId){
 
 function cartTotal(){
   let totalSum = 0;
-  for (i = 0; i < cart.length; i++){
+  for (let i = 0; i < cart.length; i++){
     totalSum+= cart[i].price * cart[i].quantity;
   }
   return totalSum;
-};
+}
 /**function cartTotal(){
   console.log("Before going through cart: " + totalSum);
   for (i = 0; i < cart.length; i++){
@@ -143,17 +129,19 @@ function emptyCart(){
   - pay will return a negative number if there is a remaining balance
   - pay will return a positive number if money should be returned to customer
 */
-function pay (ammount){
+
+let totalPaid = 0;
+function pay (amount){
   let sumToPay = cartTotal();
-  let change = ammount - sumToPay;
+  totalPaid += amount;
  
-  if ( ammount < sumToPay){
-    return `${change}`
+  if ( amount < sumToPay){
+    return `${totalPaid - sumToPay}`
   }
   else {
-    return  `${change}`
+    return  `${totalPaid - sumToPay}`
   }
-};
+}
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
